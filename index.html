@@ -13,7 +13,8 @@
             justify-content: flex-start;
             min-height: 100vh;
             margin: 0;
-            background: teal;
+            background: url('assets/windows_xp_bliss-wide.jpg') no-repeat center center fixed;
+            background-size: cover;
         }
         .window {
             width: 400px;
@@ -35,11 +36,20 @@
             font-size: 1.2em;
         }
         .bottom-space {
-            margin-bottom: 75px;
+            margin-bottom: 200px;
+        }
+        .ransomized-title {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 25%;
+            height: auto;
         }
     </style>
 </head>
 <body>
+    <img src="assets\what_has_trump_done_now_header.png" alt="Ransomized Title" class="ransomized-title">
+
     <div class="progress-container">
         <div class="progress-label">Percentage of Way Through Trump Presidency</div>
         <progress max="100" value="1"></progress>
