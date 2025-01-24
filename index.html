@@ -17,7 +17,8 @@
             background-size: cover;
         }
         .window {
-            width: 500px;
+            width: 90%;
+            max-width: 500px;
             margin-top: 20px;
         }
         .progress-container {
@@ -116,7 +117,7 @@
             </ul>
         </div>
     </div>
-  
+
     <div class="window bottom-space">
           <div class="title-bar">
               <div class="title-bar-text">Monday, January 20th, 2025 (Inauguration & MLK Day)</div>
@@ -145,11 +146,9 @@
         if (windowBody.style.display === 'none') {
             windowBody.style.display = 'block';
             button.setAttribute('aria-label', 'Minimize');
-            // button.textContent = '-'; // Set button to minimize icon
         } else {
             windowBody.style.display = 'none';
             button.setAttribute('aria-label', 'Maximize');
-            // button.textContent = '+'; // Set button to maximize icon
         }
     }
     </script>
