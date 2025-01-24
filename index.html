@@ -69,7 +69,7 @@
         <div class="title-bar">
             <div class="title-bar-text">Thursday, January 23, 2025 (Today)</div>
             <div class="title-bar-controls">
-                <button aria-label="Minimize"></button>
+                <button aria-label="Minimize" onclick="toggleWindow(this)"></button>
             </div>
         </div>
         <div class="window-body">
@@ -86,7 +86,7 @@
         <div class="title-bar">
             <div class="title-bar-text">Wednesday, January 22, 2025 (Yesterday)</div>
             <div class="title-bar-controls">
-                <button aria-label="Minimize"></button>
+                <button aria-label="Minimize" onclick="toggleWindow(this)"></button>
             </div>
         </div>
         <div class="window-body">
@@ -99,11 +99,11 @@
         </div>
     </div>
 
-    <div class="window bottom-space">
+    <div class="window">
         <div class="title-bar">
             <div class="title-bar-text">Tuesday, January 21, 2025</div>
             <div class="title-bar-controls">
-                <button aria-label="Minimize"></button>
+                <button aria-label="Minimize" onclick="toggleWindow(this)"></button>
             </div>
         </div>
         <div class="window-body">
@@ -121,7 +121,7 @@
           <div class="title-bar">
               <div class="title-bar-text">Monday, January 20th, 2025 (Inauguration & MLK Day)</div>
               <div class="title-bar-controls">
-                  <button aria-label="Minimize"></button>
+                  <button aria-label="Minimize" onclick="toggleWindow(this)"></button>
               </div>
           </div>
           <div class="window-body">
@@ -139,5 +139,19 @@
               </ul>
           </div>
       </div>
+  <script>
+    function toggleWindow(button) {
+        const windowBody = button.closest('.window').querySelector('.window-body');
+        if (windowBody.style.display === 'none') {
+            windowBody.style.display = 'block';
+            button.setAttribute('aria-label', 'Minimize');
+            // button.textContent = '-'; // Set button to minimize icon
+        } else {
+            windowBody.style.display = 'none';
+            button.setAttribute('aria-label', 'Maximize');
+            // button.textContent = '+'; // Set button to maximize icon
+        }
+    }
+    </script>
 </body>
 </html>
