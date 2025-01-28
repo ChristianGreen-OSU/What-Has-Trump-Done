@@ -69,6 +69,24 @@
 
     <div class="window">
         <div class="title-bar">
+            <div class="title-bar-text">Tuesday, January 28, 2025</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize" onclick="toggleWindow(this)"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <ul>
+                <li>President Trump ordered a pause on all federal grants and loans, causing widespread confusion and concern over its impact on programs like Medicaid. <a href="https://www.reuters.com/world/trump-orders-pause-all-federal-grants-loans-2025-01-28/" target="_blank">Read more</a></li>
+                <li>White House Press Secretary Karoline Leavitt held her inaugural press briefing, addressing numerous questions regarding the administration's funding freeze. <a href="https://abcnews.go.com/Politics/trump-white-house-clarify-confusion-abrupt-federal-assistance/story?id=118184086" target="_blank">Read more</a></li>
+                <li>The Senate confirmed Sean Duffy as the United States Secretary of Transportation. <a href="https://en.wikipedia.org/wiki/Timeline_of_the_Donald_Trump_presidency_%282025_Q1%29" target="_blank">Read more</a></li>
+                <li>GLAD Law and the National Center for Lesbian Rights filed a federal lawsuit challenging President Trump's executive order barring transgender individuals from serving in the military. <a href="https://en.wikipedia.org/wiki/Timeline_of_the_Donald_Trump_presidency_%282025_Q1%29" target="_blank">Read more</a></li>
+                <li>President Trump and First Lady Melania Trump attended the Commander-in-Chief Ball, marking the first of three inaugural balls for the evening. <a href="https://nypost.com/video/donald-trump-melania-trump-take-the-stage-for-commander-in-chief-ball/" target="_blank">Read more</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="window">
+        <div class="title-bar">
             <div class="title-bar-text">Monday, January 27, 2025</div>
             <div class="title-bar-controls">
                 <button aria-label="Minimize" onclick="toggleWindow(this)"></button>
@@ -218,6 +236,38 @@
             button.setAttribute('aria-label', 'Maximize');
         }
     }
+
+    // Function to update the window titles
+    function updateWindowTitles() {
+        // Get today's date in the format: "Monday, January 27, 2025"
+        const today = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const todayFormatted = today.toLocaleDateString('en-US', options);
+
+        // Select all title elements
+        const titleBars = document.querySelectorAll('.title-bar-text');
+
+        titleBars.forEach(titleBar => {
+            let titleText = titleBar.textContent;
+            console.log(titleText);
+
+            // Check if the title contains today's date
+            if (titleText.includes(todayFormatted)) {
+                // If "(Today)" is not already in the title, add it
+                if (!titleText.includes('(Today)')) {
+                    titleBar.textContent = `${todayFormatted} (Today)`;
+                }
+            } else {
+                // If the title has "(Today)" but it's not today's date, remove it
+                if (titleText.includes('(Today)')) {
+                    titleBar.textContent = titleText.replace(' (Today)', '');
+                }
+            }
+        });
+    }
+
+    // Run the function on page load
+    updateWindowTitles();
     </script>
 </body>
 </html>
