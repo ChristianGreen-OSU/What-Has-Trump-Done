@@ -74,7 +74,7 @@
 
     <div class="progress-container">
         <div class="progress-label">Percentage of Way Through Trump Presidency</div>
-        <progress max="100" value="1"></progress>
+        <progress id="progressBar" max="100"></progress>
     </div>
     
     <div class="window">
@@ -671,7 +671,6 @@
 
         titleBars.forEach(titleBar => {
             let titleText = titleBar.textContent;
-            console.log(titleText);
 
             // Check if the title contains today's date
             if (titleText.includes(todayFormatted)) {
@@ -688,7 +687,32 @@
         });
     }
 
-    // Run the function on page load
+    function updateProgressBar() {
+        const startDate = new Date("January 20, 2025"); // Trump’s second term start date
+        const endDate = new Date("January 20, 2029"); // Trump’s second term end date
+        const today = new Date(); // Current date
+
+        // Calculate total term length in days
+        const totalTermDays = (endDate - startDate) / (1000 * 60 * 60 * 24);
+        // Calculate days elapsed since start of term
+        const daysElapsed = (today - startDate) / (1000 * 60 * 60 * 24);
+        // Calculate percentage completed
+        let percentageCompleted = (daysElapsed / totalTermDays) * 100;
+
+        // Ensure percentage is within valid range (0 - 100)
+        percentageCompleted = Math.max(0, Math.min(100, percentageCompleted));
+
+        // Update progress bar value
+        const progressBar = document.getElementById("progressBar");
+        progressBar.value = percentageCompleted;
+
+        // Add an accessible label
+        progressBar.setAttribute("aria-label", `Trump Presidency Progress: ${percentageCompleted.toFixed(2)}%`);
+        progressBar.setAttribute("title", `${percentageCompleted.toFixed(2)}%`);
+    }
+
+    // Run functions on page load
+    updateProgressBar();
     updateWindowTitles();
     </script>
 </body>
