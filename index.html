@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What Has Trump Done Now</title>
     <link rel="stylesheet" href="https://unpkg.com/xp.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         body {
             display: flex;
@@ -66,6 +67,27 @@
                 top: 0;
                 left: 0;
             }
+        }
+        .screenshot-container {
+            text-align: right;
+            margin-top: 10px;
+        }
+        .screenshot-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
     </style>
 </head>
@@ -1795,6 +1817,9 @@
               <li>Congressman Andy Ogles introduced a constitutional amendment to allow Trump to seek a third non-consecutive term, bypassing current term limits.</li>
               <li>Trump delivered a video message to the March for Life rally, reaffirming his administration’s commitment to anti-abortion policies.</li>
           </ul>
+          <div class="screenshot-container">
+              <img class="screenshot-btn" onclick="copyScreenshotToClipboard(this)" src="assets/clippy.png" alt="Take Screenshot" width="50" height="50">
+          </div>
       </div>
   </div>
     
@@ -1812,6 +1837,9 @@
                 <li>An executive order was signed supporting federal recognition of the Lumbee Tribe.</li>
                 <li>A federal judge blocked his order to end birthright citizenship.</li>
             </ul>
+            <div class="screenshot-container">
+                <img class="screenshot-btn" onclick="takeScreenshot(this)" src="assets/clippy.png" alt="Take Screenshot" width="50" height="50">
+            </div>
         </div>
     </div>
 
@@ -1829,6 +1857,9 @@
                 <li>The House passed the Laken Riley Act, awaiting his signature.</li>
                 <li>A pardoned January 6 rioter was re-arrested, sparking controversy.</li>
             </ul>
+            <div class="screenshot-container">
+                <img class="screenshot-btn" onclick="takeScreenshot(this)" src="assets/clippy.png" alt="Take Screenshot" width="50" height="50">
+            </div>
         </div>
     </div>
 
@@ -1847,6 +1878,9 @@
                 <li>Ross Ulbricht, founder of Silk Road, received a full pardon.</li>
                 <li>Trump ordered the closure of all federal Diversity, Equity, and Inclusion offices.</li>
             </ul>
+            <div class="screenshot-container">
+                <img class="screenshot-btn" onclick="takeScreenshot(this)" src="assets/clippy.png" alt="Take Screenshot" width="50" height="50">
+            </div>
         </div>
     </div>
 
@@ -1870,8 +1904,12 @@
                   <li>Reinstated Cuba as a state sponsor of terrorism.</li>
                   <li>Renamed geographical landmarks, including reverting Denali to Mount McKinley.</li>
               </ul>
+              <div class="screenshot-container">
+                <img class="screenshot-btn" onclick="takeScreenshot(this)" src="assets/clippy.png" alt="Take Screenshot" width="50" height="50">
+            </div>
           </div>
       </div>
+      <div id="notification" class="notification">Screenshot copied to clipboard!</div>
   <script>
     function toggleWindow(button) {
         const windowBody = button.closest('.window').querySelector('.window-body');
@@ -1882,6 +1920,36 @@
             windowBody.style.display = 'none';
             button.setAttribute('aria-label', 'Maximize');
         }
+    }
+
+    async function copyScreenshotToClipboard(button) {
+        const windowElement = button.closest('.window');
+        html2canvas(windowElement).then(canvas => {
+            canvas.toBlob(blob => {
+                navigator.clipboard.write([
+                    new ClipboardItem({ 'image/png': blob })
+                ]).then(() => {
+                    showNotification();
+                }).catch(err => {
+                    console.error('Failed to copy screenshot:', err);
+                });
+            });
+        });
+    }
+
+    function showNotification() {
+        const notification = document.getElementById('notification');
+        notification.style.display = 'block';
+        setTimeout(() => {
+            notification.style.opacity = '1';
+        }, 10);
+        
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 500);
+        }, 3000);
     }
 
     // Function to update the window titles
